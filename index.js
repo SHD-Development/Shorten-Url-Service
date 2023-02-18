@@ -33,6 +33,10 @@ app.get('/create', (req, res) => {
 });
 
 app.post('/create', (req, res) => {
+    if (req.body.customAlias == "create") {
+        return res.render('create', { error: "想幹嘛", newURL: {} });
+    }
+
     var shortID = nanoid(11);
 
     if (req.body.customAlias != "") {
