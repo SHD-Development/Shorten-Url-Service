@@ -27,18 +27,6 @@ const urlSchema = new mongoose.Schema({
 const URL = new mongoose.model('URL', urlSchema);
 
 
-//==============================導向程式==============================
-app.get('/', async (req, res) => {
-    res.render('redirect', { error: "", URL: { longURL: "https://shdhost.xyz/" } });
-});
-
-app.get('/:ID', async (req, res) => {
-    const result = await URL.findOne({ shortID: req.params.ID })
-    if (result == null) return res.sendStatus(404)
-    res.render('redirect', { error: "", URL: result });
-});
-
-
 //==============================創建頁面==============================
 app.get('/create', (req, res) => {
     res.render('create', { error: "", newURL: {} });
@@ -99,6 +87,17 @@ function displayShortURL(req, res) {
         }
     })
 }
+
+//==============================導向程式==============================
+app.get('/', async (req, res) => {
+    res.render('redirect', { error: "", URL: { longURL: "https://shdhost.xyz/" } });
+});
+
+app.get('/:ID', async (req, res) => {
+    const result = await URL.findOne({ shortID: req.params.ID })
+    if (result == null) return res.sendStatus(404)
+    res.render('redirect', { error: "", URL: result });
+});
 
 //==============================服務啟動==============================
 const port = config.port || 3000;
