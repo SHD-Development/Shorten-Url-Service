@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/redirect.css">
+    <title>SHD Cloud 縮網址系統</title>
+</head>
+
+<body>
+    <div>
+        <h1 style="font-family: Roboto; color:white;">網站加載中... 請稍候</h1>
+        <div class="progress">
+            <div class="progress-value"></div>
+        </div>
+        <br>
+        <a href="<%= URL.longURL %>" class="quick">立即前往該網站</a>
+        <a href="/create" class="make">製作自己的連結</a>
+        <a href="https://dc.shdhost.xyz" class="info">SHD Cloud官方群組</a>
+        <br>
+
+        <p>Powered By SHD Cloud - 您可以建立一個自己的縮網址，並且完全免費！</p>
+        <script>
+            window.setTimeout(function () { window.location.href = "<%= URL.longURL %>" }, 3500);
+        </script>
+</body>
+
+</html>

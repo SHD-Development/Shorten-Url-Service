@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap');
+
+*{
+    font-family: 'Nunito', sans-serif;
+}
+
+.error{
+    font-size: 20px;
+    color:red;
+}

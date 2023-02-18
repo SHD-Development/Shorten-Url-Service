@@ -1,0 +1,96 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Regular.eot');
+    src: local('Roboto'), local('Roboto-Regular'),
+        url('../fonts/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Roboto-Regular.woff') format('woff'),
+        url('../fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    min-width: 275px;
+    height: 100vh;
+    margin: 0 10vw;
+    overflow: hidden;
+    color: #ffffff;
+    font-family: Roboto;
+    background-image: url('https://i.pinimg.com/originals/33/1d/34/331d344c012c1ff4307858f8c9f38706.gif');
+}
+
+
+h1 {
+    margin: 0;
+    font-size: 6em;
+    font-weight: 100;
+}
+
+p {
+    width: 95%;
+    font-size: 1.5em;
+    line-height: 1.4;
+}
+
+
+.progress {
+    background: rgba(255, 255, 255, 0.1);
+    justify-content: flex-start;
+    border-radius: 100px;
+    align-items: center;
+    position: relative;
+    padding: 0 5px;
+    display: flex;
+    height: 40px;
+    width: 500px;
+}
+
+.progress-value {
+    animation: load 2.7s normal forwards;
+    box-shadow: 0 10px 40px -10px #fff;
+    border-radius: 100px;
+    background: repeating-linear-gradient(45deg, #0d6efd, #0d6efd 10px, #3184fd 10px, #3184fd 20px);
+    height: 30px;
+    width: 0;
+}
+
+@keyframes load {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+.quick,
+.make,
+.info {
+    display: inline-block;
+    padding: 0.8em 1em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    border: 3px solid #ffffff;
+    color: #ffffff;
+    font-weight: 500;
+    border-radius: 15px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.2em;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition: 0.1s;
+}
+
+.quick:hover,
+.make:hover,
+.info:hover {
+    background: rgba(255, 255, 255, 0.4);
+    border: 5px solid #ffffff;
+}
