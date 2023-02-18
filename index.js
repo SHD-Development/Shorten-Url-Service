@@ -1,4 +1,5 @@
-require('dotenv').config();
+//=============================初始定義==============================
+const config = require('./config.json');
 const express = require('express');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
@@ -6,28 +7,42 @@ const mongoose = require('mongoose');
 const { nanoid } = require('nanoid')
 const validURL = require('valid-url');
 
+var longURL;
+var error = "伺服器錯誤，請稍後再試一次。";
+
 const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 
-mongoose.connect(process.env.MONGOOSE_URI);
+//==============================資料庫連接==============================
+mongoose.connect(config.mongodb_uri);
 
 const urlSchema = new mongoose.Schema({
     longURL: String,
     shortURL: String,
     shortID: String
-})
-
+});
 const URL = new mongoose.model('URL', urlSchema);
 
-var longURL;
-var error = "Server Error!! Please Try Again Later.";
 
+//==============================導向程式==============================
+app.get('/', async (req, res) => {
+    res.render('redirect', { error: "", URL: { longURL: "https://shdhost.xyz/" } });
+});
+
+app.get('/:ID', async (req, res) => {
+    const result = await URL.findOne({ shortID: req.params.ID })
+    if (result == null) return res.sendStatus(404)
+    res.render('redirect', { error: "", URL: result });
+});
+
+
+//==============================創建頁面==============================
 app.get('/create', (req, res) => {
     res.render('create', { error: "", newURL: {} });
-})
+});
 
 app.post('/create', (req, res) => {
     var shortID = nanoid(11);
@@ -37,7 +52,7 @@ app.post('/create', (req, res) => {
     }
 
     longURL = req.body.longURL;
-    var shortURL = process.env.BASE_URL + "/" + shortID;
+    var shortURL = config.base_url + "/" + shortID;
 
     const newURL = new URL({
         longURL: longURL,
@@ -51,49 +66,31 @@ app.post('/create', (req, res) => {
                 if (result == null) {
                     newURL.save(function (erro) {
                         if (erro) {
-                            // console.log(erro);
                             res.render('create', { error: error, newURL: {} });
                         }
                         else {
                             displayShortURL(req, res);
                         }
                     })
-                }
-                else {
-                    // console.log("Original URL already in Database");
-                    // res.redirect('/api');
+                } else {
                     displayShortURL(req, res);
                 }
             }
             else {
-                // console.log("Error Occured in Finding");
                 res.render('create', { error: error, newURL: {} });
             }
         })
     }
     else if (!validURL.isUri(longURL) && !validURL.isUri(shortURL)) {
-        error = "Invalid Long URL and Custom Alias!";
-        res.render('create', { error: error, newURL: {} });
+        res.render('create', { error: "原網址及自訂短網址格式錯誤", newURL: {} });
     }
     else if (!validURL.isUri(longURL)) {
-        error = "Invalid Long URL!";
-        res.render('create', { error: error, newURL: {} });
+        res.render('create', { error: "原網址格式錯誤", newURL: {} });
     }
     else if (!validURL.isUri(shortURL)) {
-        error = "Invalid Custom Alias!";
-        res.render('create', { error: error, newURL: {} });
+        res.render('create', { error: "原網址格式錯誤", newURL: {} });
     }
-
-
-    // if (validURL.isUri(longURL)) {
-
-
-    // }
-    // else {
-    //     error = "Invalid URL";
-    //     res.render('index', { error: error, shortURL: "", shortID: "" });
-    // }
-})
+});
 
 function displayShortURL(req, res) {
     URL.findOne({ longURL: longURL }, function (err, result) {
@@ -103,18 +100,8 @@ function displayShortURL(req, res) {
     })
 }
 
-app.get('/', async (req, res) => {
-    res.render('redirect', { error: "", URL: { longURL: "https://shdhost.xyz/" } });
-    //res.redirect(result.longURL);
-})
-
-app.get('/:shortID', async (req, res) => {
-    const result = await URL.findOne({ shortID: req.params.shortID })
-    if (result == null) return res.sendStatus(404)
-    res.render('redirect', { error: "", URL: result });
-    //res.redirect(result.longURL);
-})
-
-app.listen(process.env.PORT || 3000, () => {
-    console.log("Successfully listening");
+//==============================服務啟動==============================
+const port = config.port || 3000;
+app.listen(port, () => {
+    console.log(`服務架於 ${port} Port`);
 })

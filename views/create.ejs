@@ -1,27 +1,13 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="zh-tw">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Primary Meta Tags -->
-    <title>URL Shortener</title>
+    <title>SHD Cloud 縮網址系統</title>
     <meta name="title" content="URL Shortener">
     <meta name="description"
-        content="A URL Shortener made with the help of Node.js and MongoDB as Database. Other Technologies used are Express.js, EJS and Mongoose.">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="URL Shortener">
-    <meta property="og:description"
-        content="A URL Shortener made with the help of Node.js and MongoDB as Database. Other Technologies used are Express.js, EJS and Mongoose.">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="URL Shortener">
-    <meta property="twitter:description"
         content="A URL Shortener made with the help of Node.js and MongoDB as Database. Other Technologies used are Express.js, EJS and Mongoose.">
 
     <!-- Favicon -->
@@ -36,26 +22,26 @@
 
 <body>
     <div class="my-5 container text-center">
-        <h1>URL Shortener <img src="img/logo.png" alt="" width="40px"></h1>
+        <h1>SHD Cloud 縮網址系統 <img src="https://cdn.discordapp.com/icons/990938484959236096/a_e81d221cb1c8a44735e3b818c58690f3.gif?size=1024" alt="" width="40px"></h1>
         <div class="my-5 text-center">
-            <form action="/" method="post">
+            <form action="/create" method="post">
                 <div class="row text-center d-flex justify-content-center">
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-8">
-                        <input class="form-control form-control-lg" name="longURL" type="text" placeholder="Long URL" autocomplete="off" autofocus= "true" required>
+                        <input class="form-control form-control-lg" name="longURL" type="text" placeholder="原網址" autocomplete="off" autofocus= "true" required>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-8 my-2">
                         <input class="form-control form-control-lg customAlias" name="customAlias" type="text"
-                            placeholder="Custom Alias (Optional)" autocomplete="off">
+                            placeholder="自訂連結（選項）" autocomplete="off">
                     </div>
                 </div>
-                <button class="my-3 btn btn-dark" type="submit">Shorten</button>
+                <button class="my-3 btn btn-dark" type="submit">縮短吧！</button>
                 <div class="alert col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 mx-auto error">
                     <%= error %>
                 </div>
             </form>
         </div>
         <div>
-            <p class="mx-auto pt-2 w-50 bg-transparent" style="height: 60px; font-size: 30px;">Shorten URL:
+            <p class="mx-auto pt-2 w-50 bg-transparent" style="height: 60px; font-size: 30px;">產生的縮網址：
                 <a href="/<%= newURL.shortID %>" target="_blank">
                     <%= newURL.shortURL %>
                 </a>
