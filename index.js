@@ -107,4 +107,4 @@ app.get('/:ID', async (req, res) => {
 const port = config.port || 3000;
 app.listen(port, () => {
     console.log(`服務架於 ${port} Port`);
-})
+});
