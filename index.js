@@ -84,6 +84,8 @@ app.post('/create', (req, res) => {
     }
 });
 
+
+//==============================Functions==============================
 function displayShortURL(req, res) {
     URL.findOne({ longURL: longURL }, function (err, result) {
         if (!err) {
@@ -91,6 +93,97 @@ function displayShortURL(req, res) {
         }
     })
 }
+
+
+//==============================API系統==============================
+app.use(bodyParser.json());
+
+app.post("/api/create", async (req, res) => {
+    if (!req.body) return res.send({
+        status: "error",
+        code: 401,
+        message: "No Body"
+    });
+
+    console.log(req);
+    let longURL = req.body.longURL;
+    var shortID = nanoid(11);
+
+    if (req.body.shortID) {
+        shortID = req.body.shortID;
+    }
+
+    var shortURL = config.base_url + "/" + shortID;
+
+    const newURL = new URL({
+        longURL: longURL,
+        shortURL: shortURL,
+        shortID: shortID
+    })
+
+    if (validURL.isUri(longURL) && validURL.isUri(shortURL)) {
+        URL.findOne({ longURL: longURL }, function (err, result) {
+            if (!err) {
+                if (result == null) {
+                    newURL.save(function (erro) {
+                        if (erro) {
+                            return res.send({
+                                status: "error",
+                                code: 500,
+                                message: "Server Error"
+                            });
+                        } else {
+                            return res.send({
+                                status: "success",
+                                code: 200,
+                                message: "created",
+                                data: {
+                                    longURL: longURL,
+                                    shortURL: shortURL
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    return res.send({
+                        status: "success",
+                        code: 200,
+                        message: "created",
+                        data: {
+                            longURL: longURL,
+                            shortURL: shortURL
+                        }
+                    });
+                }
+            } else {
+                return res.send({
+                    status: "error",
+                    code: 500,
+                    message: "Server Error"
+                });
+            }
+        })
+    } else if (!validURL.isUri(longURL) && !validURL.isUri(shortURL)) {
+        return res.send({
+            status: "error",
+            code: 400,
+            message: "long url and short id illegal"
+        });
+    } else if (!validURL.isUri(longURL)) {
+        return res.send({
+            status: "error",
+            error: 401,
+            message: "long url illegal"
+        });
+    } else if (!validURL.isUri(shortURL)) {
+        return res.send({
+            status: "error",
+            error: 402,
+            message: "short id illegal"
+        });
+    }
+});
+
 
 //==============================導向程式==============================
 app.get('/', async (req, res) => {
