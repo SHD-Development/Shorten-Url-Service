@@ -135,7 +135,7 @@ app.post("/api/create", async (req, res) => {
                         } else {
                             return res.send({
                                 status: "success",
-                                code: 200,
+                                code: 201,
                                 message: "created",
                                 data: {
                                     longURL: longURL,
