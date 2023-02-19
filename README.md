@@ -2,7 +2,7 @@
 
 本程式由 SHD Development 開發，提供縮網址服務。
 
-官方縮網址服務連結：https://scurl.fun/。
+官方縮網址服務連結：https://scurl.fun/ 。
 
 本程式使用nodejs語言，使用express架設服務，以MongoDB為資料儲存之資料庫。
 
