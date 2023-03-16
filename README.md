@@ -59,7 +59,7 @@ This project was created using NodeJS with express, and database hosted by Mongo
 2. Node package manager(npm).
 3. MongoDB hosted anywhere.
 
-### 設定步驟
+### Set-up Steps
 
 1. Download the source code, and save it anywhere you want.
 
