@@ -1,10 +1,12 @@
+中文版 | <a href="https://github.com/SHD-Development/Shorten-Url-Service/blob/main/En.md">English Version</a>
+
 # SHD縮網址系統
 
 本程式由 SHD Development 開發，提供縮網址服務。
 
 官方縮網址服務連結：https://scurl.fun/ 。
 
-本程式使用 [Node.js](https://nodejs.org/) 語言，使用 [express](http://expressjs.com/) 架設服務，以 [MongoDB](https://www.mongodb.com/) 為資料儲存之資料庫。
+本程式使用nodejs語言，使用express架設服務，以MongoDB為資料儲存之資料庫。
 
 ## 使用教學
 
