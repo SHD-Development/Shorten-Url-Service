@@ -4,7 +4,7 @@
 
 官方縮網址服務連結：https://scurl.fun/ 。
 
-本程式使用nodejs語言，使用express架設服務，以MongoDB為資料儲存之資料庫。
+本程式使用 [Node.js](https://nodejs.org/) 語言，使用 [express](http://expressjs.com/) 架設服務，以 [MongoDB](https://www.mongodb.com/) 為資料儲存之資料庫。
 
 ## 使用教學
 
