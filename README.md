@@ -1,4 +1,4 @@
-中文版 | <a href="https://github.com/SHD-Development/Shorten-Url-Service/blob/main/En.md">English Version</a>
+中文版 | <a href="https://github.com/SHD-Development/Shorten-Url-Service/blob/main/README_EN.md">English Version</a>
 
 # SHD縮網址系統
 
